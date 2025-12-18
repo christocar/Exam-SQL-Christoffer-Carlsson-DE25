@@ -1,56 +1,53 @@
 ---
-title: Welcome to Evidence
+title: Sakila Dashboard
 ---
 
-<Details title='How to edit this page'>
+## Welcome to the Sakila Dashboard
 
-  This page can be found in your project at `/pages/index.md`. Make a change to the markdown file and save it to see the change take effect in your browser.
-</Details>
+This dashboard explores insights from the **Sakila DVD Rental Database** using  
+**DuckDB** for analytics and **Evidence** for interactive data visualization.
 
-```sql categories
-  select
-      category
-  from needful_things.orders
-  group by category
-```
+The project focuses on:
+- Film characteristics (length, rating, rental price)
+- Actor participation across films and genres
+- Rental activity and popularity patterns
+- Category-based insights
 
-<Dropdown data={categories} name=category value=category>
-    <DropdownOption value="%" valueLabel="All Categories"/>
-</Dropdown>
+Use the navigation to explore the different analyses and visualizations built on top of the Sakila dataset.
 
-<Dropdown name=year>
-    <DropdownOption value=% valueLabel="All Years"/>
-    <DropdownOption value=2019/>
-    <DropdownOption value=2020/>
-    <DropdownOption value=2021/>
-</Dropdown>
+---
 
-```sql orders_by_category
-  select 
-      date_trunc('month', order_datetime) as month,
-      sum(sales) as sales_usd,
-      category
-  from needful_things.orders
-  where category like '${inputs.category.value}'
-  and date_part('year', order_datetime) like '${inputs.year.value}'
-  group by all
-  order by sales_usd desc
-```
+## Available Dashboards
 
-<BarChart
-    data={orders_by_category}
-    title="Sales by Month, {inputs.category.label}"
-    x=month
-    y=sales_usd
-    series=category
-/>
+- **Sakila Film & Rental Analysis**  
+  Explore movies, actors, rentals, and categories from the Sakila database.
 
-## What's Next?
-- [Connect your data sources](settings)
-- Edit/add markdown files in the `pages` folder
-- Deploy your project with [Evidence Cloud](https://evidence.dev/cloud)
+---
 
-## Get Support
-- Message us on [Slack](https://slack.evidence.dev/)
-- Read the [Docs](https://docs.evidence.dev/)
-- Open an issue on [Github](https://github.com/evidence-dev/evidence)
+## About the Project
+
+This dashboard is part of a data analytics project demonstrating:
+- SQL-based data exploration
+- Analytical reasoning using real-world relational data
+- Clear and reproducible visual communication
+
+All data originates from the standard **Sakila sample database**, loaded into DuckDB and queried via Evidence.
+
+---
+
+## How to Use
+
+- Navigate using the sidebar to access specific analyses
+- Review tables and charts to understand patterns in the data
+- Each page focuses on a specific analytical question
+
+---
+
+## Project Structure
+
+- `sources/` – SQL queries defining reusable datasets
+- `pages/` – Markdown dashboards and visualizations
+- `duckdb/` – DuckDB database containing Sakila data
+
+---
+
